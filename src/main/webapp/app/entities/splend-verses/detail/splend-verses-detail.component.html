@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (splendVerses(); as splendVersesRef) {
+      <div>
+        <h2 data-cy="splendVersesDetailsHeading"><span jhiTranslate="divineSignApp.splendVerses.detail.title">Splend Verses</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ splendVersesRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splendVerses.word">Word</span></dt>
+          <dd>
+            <span>{{ splendVersesRef.word }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splendVerses.number">Number</span></dt>
+          <dd>
+            <span>{{ splendVersesRef.number }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splendVerses.condition">Condition</span></dt>
+          <dd>
+            <span>{{ splendVersesRef.condition }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splendVerses.validationMethod">Validation Method</span></dt>
+          <dd>
+            @if (splendVerses()!.validationMethod) {
+              <div>
+                <a [routerLink]="['/validation-model', splendVerses()!.validationMethod?.id, 'view']">{{
+                  splendVersesRef.validationMethod?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/splend-verses', splendVersesRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

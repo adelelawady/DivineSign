@@ -1,0 +1,28 @@
+{
+  "divineSignApp": {
+    "splendVerses": {
+      "home": {
+        "title": "Splend Verses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Splend Verses",
+        "createOrEditLabel": "Create or edit a Splend Verses",
+        "notFound": "No Splend Verses found"
+      },
+      "created": "A new Splend Verses is created with identifier {{ param }}",
+      "updated": "A Splend Verses is updated with identifier {{ param }}",
+      "deleted": "A Splend Verses is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Splend Verses {{ id }}?"
+      },
+      "detail": {
+        "title": "Splend Verses"
+      },
+      "id": "ID",
+      "word": "Word",
+      "number": "Number",
+      "condition": "Condition",
+      "validationMethod": "Validation Method",
+      "verses": "Verses"
+    }
+  }
+}

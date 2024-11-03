@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (validationModel(); as validationModelRef) {
+      <div>
+        <h2 data-cy="validationModelDetailsHeading">
+          <span jhiTranslate="divineSignApp.validationModel.detail.title">Validation Model</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ validationModelRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.validationModel.name">Name</span></dt>
+          <dd>
+            <span>{{ validationModelRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.validationModel.type">Type</span></dt>
+          <dd>
+            <span>{{ validationModelRef.type }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/validation-model', validationModelRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

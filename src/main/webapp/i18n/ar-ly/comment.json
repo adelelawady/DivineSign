@@ -1,0 +1,30 @@
+{
+  "divineSignApp": {
+    "comment": {
+      "home": {
+        "title": "Comments",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء Comment جديد",
+        "createOrEditLabel": "إنشاء أو تعديل Comment",
+        "notFound": "لم يتم العثور على Comments"
+      },
+      "created": "Comment جديد تم إنشاؤه بالمعرف {{ param }}",
+      "updated": "Comment تم تحديثه بالمعرف {{ param }}",
+      "deleted": "Comment تم حذفه بالمعرف {{ param }}",
+      "delete": {
+        "question": "هل أنت متأكد أنك تريد حذف Comment {{ id }}؟"
+      },
+      "detail": {
+        "title": "Comment"
+      },
+      "id": "ID",
+      "content": "Content",
+      "likes": "Likes",
+      "deleted": "Deleted",
+      "splend": "Splend",
+      "user": "User",
+      "parent": "Parent",
+      "comment": "Comment"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20241102231031"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "verse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "diacriticVerse",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Verse",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "surah",
+      "otherEntityRelationshipName": "verses",
+      "relationshipName": "surah",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

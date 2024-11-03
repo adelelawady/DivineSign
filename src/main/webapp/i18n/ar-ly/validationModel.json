@@ -1,0 +1,25 @@
+{
+  "divineSignApp": {
+    "validationModel": {
+      "home": {
+        "title": "Validation Models",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء Validation Model جديد",
+        "createOrEditLabel": "إنشاء أو تعديل Validation Model",
+        "notFound": "لم يتم العثور على Validation Models"
+      },
+      "created": "Validation Model جديد تم إنشاؤه بالمعرف {{ param }}",
+      "updated": "Validation Model تم تحديثه بالمعرف {{ param }}",
+      "deleted": "Validation Model تم حذفه بالمعرف {{ param }}",
+      "delete": {
+        "question": "هل أنت متأكد أنك تريد حذف Validation Model {{ id }}؟"
+      },
+      "detail": {
+        "title": "Validation Model"
+      },
+      "id": "ID",
+      "name": "Name",
+      "type": "Type"
+    }
+  }
+}

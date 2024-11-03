@@ -1,0 +1,27 @@
+{
+  "divineSignApp": {
+    "verse": {
+      "home": {
+        "title": "Verses",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء Verse جديد",
+        "createOrEditLabel": "إنشاء أو تعديل Verse",
+        "notFound": "لم يتم العثور على Verses"
+      },
+      "created": "Verse جديد تم إنشاؤه بالمعرف {{ param }}",
+      "updated": "Verse تم تحديثه بالمعرف {{ param }}",
+      "deleted": "Verse تم حذفه بالمعرف {{ param }}",
+      "delete": {
+        "question": "هل أنت متأكد أنك تريد حذف Verse {{ id }}؟"
+      },
+      "detail": {
+        "title": "Verse"
+      },
+      "id": "ID",
+      "verse": "Verse",
+      "diacriticVerse": "Diacritic Verse",
+      "surah": "Surah",
+      "splendVerses": "Splend Verses"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "divineSignApp": {
+    "validationModel": {
+      "home": {
+        "title": "Validation Models",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Validation Model",
+        "createOrEditLabel": "Create or edit a Validation Model",
+        "notFound": "No Validation Models found"
+      },
+      "created": "A new Validation Model is created with identifier {{ param }}",
+      "updated": "A Validation Model is updated with identifier {{ param }}",
+      "deleted": "A Validation Model is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Validation Model {{ id }}?"
+      },
+      "detail": {
+        "title": "Validation Model"
+      },
+      "id": "ID",
+      "name": "Name",
+      "type": "Type"
+    }
+  }
+}

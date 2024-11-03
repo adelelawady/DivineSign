@@ -28,7 +28,7 @@
     -->
 
     <logger name="com.konsol.divinesign" level="INFO"/>
-
+  <logger name="javax.management.remote.rmi" level="OFF"/>
     <logger name="angus.activation" level="WARN"/>
     <logger name="jakarta.activation" level="WARN"/>
     <logger name="jakarta.mail" level="WARN"/>

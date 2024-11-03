@@ -1,0 +1,178 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-splend-heading" data-cy="SplendCreateUpdateHeading" jhiTranslate="divineSignApp.splend.home.createOrEditLabel">
+        Create or edit a Splend
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="divineSignApp.splend.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let titleRef = editForm.get('title')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_title" jhiTranslate="divineSignApp.splend.title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          @if (titleRef.invalid && (titleRef.dirty || titleRef.touched)) {
+            <div>
+              @if (editForm.get('title')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let contentRef = editForm.get('content')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_content" jhiTranslate="divineSignApp.splend.content">Content</label>
+          <textarea class="form-control" name="content" id="field_content" data-cy="content" formControlName="content"></textarea>
+          @if (contentRef.invalid && (contentRef.dirty || contentRef.touched)) {
+            <div>
+              @if (editForm.get('content')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let likesRef = editForm.get('likes')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_likes" jhiTranslate="divineSignApp.splend.likes">Likes</label>
+          <input type="number" class="form-control" name="likes" id="field_likes" data-cy="likes" formControlName="likes" />
+          @if (likesRef.invalid && (likesRef.dirty || likesRef.touched)) {
+            <div>
+              @if (editForm.get('likes')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('likes')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let dislikesRef = editForm.get('dislikes')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dislikes" jhiTranslate="divineSignApp.splend.dislikes">Dislikes</label>
+          <input type="number" class="form-control" name="dislikes" id="field_dislikes" data-cy="dislikes" formControlName="dislikes" />
+          @if (dislikesRef.invalid && (dislikesRef.dirty || dislikesRef.touched)) {
+            <div>
+              @if (editForm.get('dislikes')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dislikes')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let verifiedRef = editForm.get('verified')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_verified" jhiTranslate="divineSignApp.splend.verified">Verified</label>
+          <input type="checkbox" class="form-check" name="verified" id="field_verified" data-cy="verified" formControlName="verified" />
+          @if (verifiedRef.invalid && (verifiedRef.dirty || verifiedRef.touched)) {
+            <div>
+              @if (editForm.get('verified')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_category" jhiTranslate="divineSignApp.splend.category">Category</label>
+          <select
+            class="form-control"
+            id="field_category"
+            data-cy="category"
+            name="category"
+            formControlName="category"
+            [compareWith]="compareCategory"
+          >
+            <option [ngValue]="null"></option>
+            @for (categoryOption of categoriesSharedCollection; track $index) {
+              <option [ngValue]="categoryOption">{{ categoryOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_verses" jhiTranslate="divineSignApp.splend.verses">Verses</label>
+          <select
+            class="form-control"
+            id="field_verses"
+            data-cy="verses"
+            name="verses"
+            formControlName="verses"
+            [compareWith]="compareSplendVerses"
+          >
+            <option [ngValue]="null"></option>
+            @for (splendVersesOption of splendVersesSharedCollection; track $index) {
+              <option [ngValue]="splendVersesOption">{{ splendVersesOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_likedUsers" jhiTranslate="divineSignApp.splend.likedUsers">Liked Users</label>
+          <select
+            class="form-control"
+            id="field_likedUsers"
+            data-cy="likedUsers"
+            multiple
+            name="likedUsers"
+            formControlName="likedUsers"
+            [compareWith]="compareUser"
+          >
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_dislikedSplends" jhiTranslate="divineSignApp.splend.dislikedSplend">Disliked Splend</label>
+          <select
+            class="form-control"
+            id="field_dislikedSplends"
+            data-cy="dislikedSplend"
+            multiple
+            name="dislikedSplends"
+            formControlName="dislikedSplends"
+            [compareWith]="compareUser"
+          >
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

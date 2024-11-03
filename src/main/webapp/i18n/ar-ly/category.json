@@ -1,0 +1,26 @@
+{
+  "divineSignApp": {
+    "category": {
+      "home": {
+        "title": "Categories",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء Category جديد",
+        "createOrEditLabel": "إنشاء أو تعديل Category",
+        "notFound": "لم يتم العثور على Categories"
+      },
+      "created": "Category جديد تم إنشاؤه بالمعرف {{ param }}",
+      "updated": "Category تم تحديثه بالمعرف {{ param }}",
+      "deleted": "Category تم حذفه بالمعرف {{ param }}",
+      "delete": {
+        "question": "هل أنت متأكد أنك تريد حذف Category {{ id }}؟"
+      },
+      "detail": {
+        "title": "Category"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "validationMethod": "Validation Method"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (comment(); as commentRef) {
+      <div>
+        <h2 data-cy="commentDetailsHeading"><span jhiTranslate="divineSignApp.comment.detail.title">Comment</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ commentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.comment.content">Content</span></dt>
+          <dd>
+            <span>{{ commentRef.content }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.comment.likes">Likes</span></dt>
+          <dd>
+            <span>{{ commentRef.likes }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.comment.deleted">Deleted</span></dt>
+          <dd>
+            <span>{{ commentRef.deleted }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.comment.splend">Splend</span></dt>
+          <dd>
+            @if (comment()!.splend) {
+              <div>
+                <a [routerLink]="['/splend', comment()!.splend?.id, 'view']">{{ commentRef.splend?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.comment.user">User</span></dt>
+          <dd>
+            <span>{{ commentRef.user?.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.comment.parent">Parent</span></dt>
+          <dd>
+            @for (parent of commentRef.parents; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/comment', parent.id, 'view']">{{ parent?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/comment', commentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

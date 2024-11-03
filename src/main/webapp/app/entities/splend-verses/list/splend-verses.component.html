@@ -1,0 +1,136 @@
+<div>
+  <h2 id="page-heading" data-cy="SplendVersesHeading">
+    <span jhiTranslate="divineSignApp.splendVerses.home.title">Splend Verses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="divineSignApp.splendVerses.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-splend-verses"
+        [routerLink]="['/splend-verses/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="divineSignApp.splendVerses.home.createLabel">Create a new Splend Verses</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (splendVerses?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="divineSignApp.splendVerses.home.notFound">No Splend Verses found</span>
+    </div>
+  }
+
+  @if (splendVerses && splendVerses.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="word">
+              <div class="d-flex">
+                <span jhiTranslate="divineSignApp.splendVerses.word">Word</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="number">
+              <div class="d-flex">
+                <span jhiTranslate="divineSignApp.splendVerses.number">Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="condition">
+              <div class="d-flex">
+                <span jhiTranslate="divineSignApp.splendVerses.condition">Condition</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="validationMethod.id">
+              <div class="d-flex">
+                <span jhiTranslate="divineSignApp.splendVerses.validationMethod">Validation Method</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (splendVerses of splendVerses; track trackId(splendVerses)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/splend-verses', splendVerses.id, 'view']">{{ splendVerses.id }}</a>
+              </td>
+              <td>{{ splendVerses.word }}</td>
+              <td>{{ splendVerses.number }}</td>
+              <td>{{ splendVerses.condition }}</td>
+              <td>
+                @if (splendVerses.validationMethod) {
+                  <div>
+                    <a [routerLink]="['/validation-model', splendVerses.validationMethod.id, 'view']">{{
+                      splendVerses.validationMethod.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/splend-verses', splendVerses.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/splend-verses', splendVerses.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(splendVerses)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (splendVerses && splendVerses.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

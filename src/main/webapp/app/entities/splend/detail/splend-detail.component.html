@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (splend(); as splendRef) {
+      <div>
+        <h2 data-cy="splendDetailsHeading"><span jhiTranslate="divineSignApp.splend.detail.title">Splend</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ splendRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.title">Title</span></dt>
+          <dd>
+            <span>{{ splendRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.content">Content</span></dt>
+          <dd>
+            <span>{{ splendRef.content }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.likes">Likes</span></dt>
+          <dd>
+            <span>{{ splendRef.likes }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.dislikes">Dislikes</span></dt>
+          <dd>
+            <span>{{ splendRef.dislikes }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.verified">Verified</span></dt>
+          <dd>
+            <span>{{ splendRef.verified }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.category">Category</span></dt>
+          <dd>
+            @if (splend()!.category) {
+              <div>
+                <a [routerLink]="['/category', splend()!.category?.id, 'view']">{{ splendRef.category?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.verses">Verses</span></dt>
+          <dd>
+            @if (splend()!.verses) {
+              <div>
+                <a [routerLink]="['/splend-verses', splend()!.verses?.id, 'view']">{{ splendRef.verses?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.likedUsers">Liked Users</span></dt>
+          <dd>
+            @for (likedUsers of splendRef.likedUsers; track $index; let last = $last) {
+              <span> {{ likedUsers.id }}{{ last ? '' : ', ' }} </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.splend.dislikedSplend">Disliked Splend</span></dt>
+          <dd>
+            @for (dislikedSplend of splendRef.dislikedSplends; track $index; let last = $last) {
+              <span> {{ dislikedSplend.id }}{{ last ? '' : ', ' }} </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/splend', splendRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

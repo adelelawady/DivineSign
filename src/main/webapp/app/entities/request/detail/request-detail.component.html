@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (request(); as requestRef) {
+      <div>
+        <h2 data-cy="requestDetailsHeading"><span jhiTranslate="divineSignApp.request.detail.title">Request</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ requestRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.request.title">Title</span></dt>
+          <dd>
+            <span>{{ requestRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.request.content">Content</span></dt>
+          <dd>
+            <span>{{ requestRef.content }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.request.verified">Verified</span></dt>
+          <dd>
+            <span>{{ requestRef.verified }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.request.deleted">Deleted</span></dt>
+          <dd>
+            <span>{{ requestRef.deleted }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.request.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'divineSignApp.RequestStatus.' + (requestRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                APPROVED: 'APPROVED',
+                REJECTED: 'REJECTED',
+                IN_PROGRESS: 'IN_PROGRESS',
+                COMPLETED: 'COMPLETED',
+              }[requestRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.request.splend">Splend</span></dt>
+          <dd>
+            @if (request()!.splend) {
+              <div>
+                <a [routerLink]="['/splend', request()!.splend?.id, 'view']">{{ requestRef.splend?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.request.user">User</span></dt>
+          <dd>
+            <span>{{ requestRef.user?.id }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/request', requestRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

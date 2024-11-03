@@ -1,0 +1,30 @@
+{
+  "divineSignApp": {
+    "request": {
+      "home": {
+        "title": "Requests",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء Request جديد",
+        "createOrEditLabel": "إنشاء أو تعديل Request",
+        "notFound": "لم يتم العثور على Requests"
+      },
+      "created": "Request جديد تم إنشاؤه بالمعرف {{ param }}",
+      "updated": "Request تم تحديثه بالمعرف {{ param }}",
+      "deleted": "Request تم حذفه بالمعرف {{ param }}",
+      "delete": {
+        "question": "هل أنت متأكد أنك تريد حذف Request {{ id }}؟"
+      },
+      "detail": {
+        "title": "Request"
+      },
+      "id": "ID",
+      "title": "Title",
+      "content": "Content",
+      "verified": "Verified",
+      "deleted": "Deleted",
+      "status": "Status",
+      "splend": "Splend",
+      "user": "User"
+    }
+  }
+}

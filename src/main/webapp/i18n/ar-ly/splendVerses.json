@@ -1,0 +1,28 @@
+{
+  "divineSignApp": {
+    "splendVerses": {
+      "home": {
+        "title": "Splend Verses",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء Splend Verses جديد",
+        "createOrEditLabel": "إنشاء أو تعديل Splend Verses",
+        "notFound": "لم يتم العثور على Splend Verses"
+      },
+      "created": "Splend Verses جديد تم إنشاؤه بالمعرف {{ param }}",
+      "updated": "Splend Verses تم تحديثه بالمعرف {{ param }}",
+      "deleted": "Splend Verses تم حذفه بالمعرف {{ param }}",
+      "delete": {
+        "question": "هل أنت متأكد أنك تريد حذف Splend Verses {{ id }}؟"
+      },
+      "detail": {
+        "title": "Splend Verses"
+      },
+      "id": "ID",
+      "word": "Word",
+      "number": "Number",
+      "condition": "Condition",
+      "validationMethod": "Validation Method",
+      "verses": "Verses"
+    }
+  }
+}

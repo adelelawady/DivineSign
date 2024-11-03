@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20241102231027"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "word",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "condition",
+      "fieldType": "String"
+    }
+  ],
+  "name": "SplendVerses",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "validationModel",
+      "relationshipName": "validationMethod",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "verse",
+      "relationshipName": "verses",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,33 @@
+{
+  "divineSignApp": {
+    "splend": {
+      "home": {
+        "title": "Splends",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء Splend جديد",
+        "createOrEditLabel": "إنشاء أو تعديل Splend",
+        "notFound": "لم يتم العثور على Splends"
+      },
+      "created": "Splend جديد تم إنشاؤه بالمعرف {{ param }}",
+      "updated": "Splend تم تحديثه بالمعرف {{ param }}",
+      "deleted": "Splend تم حذفه بالمعرف {{ param }}",
+      "delete": {
+        "question": "هل أنت متأكد أنك تريد حذف Splend {{ id }}؟"
+      },
+      "detail": {
+        "title": "Splend"
+      },
+      "id": "ID",
+      "title": "Title",
+      "content": "Content",
+      "likes": "Likes",
+      "dislikes": "Dislikes",
+      "verified": "Verified",
+      "category": "Category",
+      "verses": "Verses",
+      "tags": "Tags",
+      "likedUsers": "Liked Users",
+      "dislikedSplend": "Disliked Splend"
+    }
+  }
+}

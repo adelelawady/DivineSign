@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20241102231028"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "transliteration",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "totalVerses",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Surah",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "verse",
+      "otherEntityRelationshipName": "surah",
+      "relationshipName": "verses",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

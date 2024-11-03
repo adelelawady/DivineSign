@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (surah(); as surahRef) {
+      <div>
+        <h2 data-cy="surahDetailsHeading"><span jhiTranslate="divineSignApp.surah.detail.title">Surah</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ surahRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.surah.name">Name</span></dt>
+          <dd>
+            <span>{{ surahRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.surah.transliteration">Transliteration</span></dt>
+          <dd>
+            <span>{{ surahRef.transliteration }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.surah.type">Type</span></dt>
+          <dd>
+            <span>{{ surahRef.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.surah.totalVerses">Total Verses</span></dt>
+          <dd>
+            <span>{{ surahRef.totalVerses }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/surah', surahRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (verse(); as verseRef) {
+      <div>
+        <h2 data-cy="verseDetailsHeading"><span jhiTranslate="divineSignApp.verse.detail.title">Verse</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ verseRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.verse.verse">Verse</span></dt>
+          <dd>
+            <span>{{ verseRef.verse }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.verse.diacriticVerse">Diacritic Verse</span></dt>
+          <dd>
+            <span>{{ verseRef.diacriticVerse }}</span>
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.verse.surah">Surah</span></dt>
+          <dd>
+            @if (verse()!.surah) {
+              <div>
+                <a [routerLink]="['/surah', verse()!.surah?.id, 'view']">{{ verseRef.surah?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="divineSignApp.verse.splendVerses">Splend Verses</span></dt>
+          <dd>
+            @if (verse()!.splendVerses) {
+              <div>
+                <a [routerLink]="['/splend-verses', verse()!.splendVerses?.id, 'view']">{{ verseRef.splendVerses?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/verse', verseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

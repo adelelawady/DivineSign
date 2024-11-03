@@ -1,0 +1,28 @@
+{
+  "divineSignApp": {
+    "surah": {
+      "home": {
+        "title": "Surahs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Surah",
+        "createOrEditLabel": "Create or edit a Surah",
+        "notFound": "No Surahs found"
+      },
+      "created": "A new Surah is created with identifier {{ param }}",
+      "updated": "A Surah is updated with identifier {{ param }}",
+      "deleted": "A Surah is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Surah {{ id }}?"
+      },
+      "detail": {
+        "title": "Surah"
+      },
+      "id": "ID",
+      "name": "Name",
+      "transliteration": "Transliteration",
+      "type": "Type",
+      "totalVerses": "Total Verses",
+      "verses": "Verses"
+    }
+  }
+}

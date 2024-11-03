@@ -8,7 +8,15 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "category": "Category",
+        "comment": "Comment",
+        "request": "Request",
+        "splend": "Splend",
+        "splendVerses": "Splend Verses",
+        "surah": "Surah",
+        "tag": "Tag",
+        "validationModel": "Validation Model",
+        "verse": "Verse"
       },
       "account": {
         "main": "Account",
