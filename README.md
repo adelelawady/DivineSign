@@ -13,6 +13,57 @@
 
 DivineSign is a specialized tool designed to help users explore and uncover numerical patterns and word occurrences within the verses of the Quran. By providing an intuitive platform for searching and analyzing words and their frequency, DivineSign makes it easy to identify meaningful patterns and connections that reveal deeper layers of significance within the text.
 
+
+
+## Technologies Used
+
+BeatStream is built using:
+
+- **Java** for the backend.
+- **Spring Boot** for building the application.
+- **JHipster** for rapid development and scaffolding.
+- **Angular** (if applicable) for the front end.
+- **MongoDb** (or your preferred database) for data persistence.
+- **electron** For Windows APP
+- 
+## Requirements
+
+To run BeatStream, you will need:
+
+- ☕ Java Development Kit (JDK) 11 or later
+- **Node.js** and **npm**
+- 🐱‍🏍 **MongoDB:** Ensure that you have MongoDB running, as BeatStream uses it for data storage.
+
+## Installation
+
+1. 🛠️ **Clone the repository:**
+   ```bash
+   git clone https://github.com/adelelawady/DivineSign.git
+   cd DivineSign
+   ./mvnw
+   ```
+
+# Usage
+
+🚀 Access the application:
+Open your web browser and navigate to http://localhost:8080.
+📖 Follow the on-screen instructions to download tracks, upload songs, and manage your library.
+
+# API Documentation
+
+For API documentation, visit http://localhost:8080/swagger-ui/.
+
+# Contributing
+
+🤝 Contributions are welcome! If you have suggestions for improvements or new features, feel free to fork the repository and submit a pull request.
+
+# License
+
+📝 This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+
+
 ### Description:
 This is a screenshot captured from the local environment. It showcases the user interface of the DivineSign tool, where users can explore numerical patterns and word occurrences in Quranic verses. The UI design ensures a smooth and intuitive user experience for pattern analysis.
 <p align="center">
