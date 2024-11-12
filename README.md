@@ -21,7 +21,10 @@ This is a screenshot captured from the local environment. It showcases the user 
 
 
 
-![screencapture-localhost-4200-user-splend-67310190292aa12cd5223b4e-manage-2024-11-10-20_57_28](https://github.com/user-attachments/assets/3a8a3967-71aa-4cd4-89a2-282ec009bdc0)
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3a8a3967-71aa-4cd4-89a2-282ec009bdc0" alt="screencapture" width="80%" />
+</p>
 
 
 ## Key Features
