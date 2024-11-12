@@ -1,4 +1,4 @@
-![screencapture-localhost-4200-user-splend-67310190292aa12cd5223b4e-manage-2024-11-10-20_57_28](https://github.com/user-attachments/assets/bc1b877d-7023-4c2a-a040-8649ff009ed1)# divineSign
+# divineSign
 
 
 <p align="center">
