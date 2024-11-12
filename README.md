@@ -1,10 +1,32 @@
-# divineSign
+![screencapture-localhost-4200-user-splend-67310190292aa12cd5223b4e-manage-2024-11-10-20_57_28](https://github.com/user-attachments/assets/bc1b877d-7023-4c2a-a040-8649ff009ed1)# divineSign
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d519d029-4875-4bc0-8622-3ef836b78506" alt="muslim icon" width="100" />
+</p>
+
+
+
+
 
 # DivineSign: Unlocking the Miraculous Patterns in the Quran
 
 DivineSign is a specialized tool designed to help users explore and uncover numerical patterns and word occurrences within the verses of the Quran. By providing an intuitive platform for searching and analyzing words and their frequency, DivineSign makes it easy to identify meaningful patterns and connections that reveal deeper layers of significance within the text.
 
+### Description:
+This is a screenshot captured from the local environment. It showcases the user interface of the DivineSign tool, where users can explore numerical patterns and word occurrences in Quranic verses. The UI design ensures a smooth and intuitive user experience for pattern analysis.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/fe916d6d-6c97-4619-8455-df3755ee1ebd" alt="screencapture" width="80%" />
+</p>
+
+
+
+![screencapture-localhost-4200-user-splend-67310190292aa12cd5223b4e-manage-2024-11-10-20_57_28](https://github.com/user-attachments/assets/3a8a3967-71aa-4cd4-89a2-282ec009bdc0)
+
+
 ## Key Features
+
+
 
 ### Effortless Search for Word and Number Matches
 
