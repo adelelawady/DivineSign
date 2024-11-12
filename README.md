@@ -7,7 +7,11 @@
 
 
 
+### DivineSign v1.0 Beta
 
+You can download the latest version of DivineSign here:
+
+[Download DivineSign v1.0 Beta](https://github.com/adelelawady/DivineSign/releases/download/v1.0/DivineSign.v1.0.beta.exe)
 
 # DivineSign: Unlocking the Miraculous Patterns in the Quran
 
