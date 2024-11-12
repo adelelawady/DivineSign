@@ -1,0 +1,225 @@
+<nz-modal
+  [(nzVisible)]="isModelLoaded"
+  nzTitle="Input Form"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="submitInput()"
+  nzOkText="Create"
+  nzCancelText="Cancel"
+>
+  <ng-container *nzModalContent>
+    <nz-input-group nzSize="large">
+      <input nz-input placeholder="Enter Variable Name" [(ngModel)]="userInput" />
+
+      <div style="margin-top: 16px">
+        <nz-select nzPlaceHolder="Select input type" [(ngModel)]="inputType" style="width: 100%">
+          <nz-option nzValue="WORD" nzLabel="WORD"></nz-option>
+          <nz-option nzValue="VERSE" nzLabel="VERSE"></nz-option>
+        </nz-select>
+      </div>
+    </nz-input-group>
+  </ng-container>
+</nz-modal>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col [nzSpan]="14">
+    <nz-card>
+      <h4 class="">Search For Word in Verses</h4>
+      <nz-input-group [nzPrefix]="searchPrefix">
+        <input
+          style="color: red"
+          [formControl]="searchControl"
+          (input)="isLoading = true"
+          [disabled]="isSearchVersesDisabled"
+          type="text"
+          nz-input
+          placeholder="Search word"
+        />
+        <input
+          style="color: #198754"
+          [formControl]="regexSearchControl"
+          (input)="isLoading = true; searchVerses(this.searchControl.value)"
+          [disabled]="isSearchVersesDisabled"
+          type="text"
+          nz-input
+          placeholder="Regex Result"
+        />
+      </nz-input-group>
+      <ng-template #searchPrefix>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+
+      <!-- Stats -->
+      <div *ngIf="versesSeachResultsModel" class="stats-container">
+        <nz-statistic [nzValue]="versesSeachResultsModel.versesCount" [nzTitle]="'Verses found'"></nz-statistic>
+        <nz-statistic [nzValue]="versesSeachResultsModel.wordCount" [nzTitle]="'Words found'"></nz-statistic>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="button-group">
+        <button (click)="isModelLoaded = true" nz-button nzType="primary"><span nz-icon nzType="plus-circle"></span>Create Variable</button>
+        <button (click)="createSplendVariable(false)" nz-button nzType="primary">
+          <span nz-icon nzType="appstore-add"> </span>Add Search Results
+        </button>
+      </div>
+
+      <div
+        *ngIf="
+          versesSeachResultsModel &&
+          versesSeachResultsModel.versesCount &&
+          versesSeachResultsModel.wordCount &&
+          this.userInput &&
+          this.createVariableId === null &&
+          inputType != ''
+        "
+        class="box-footer"
+      >
+        <div class="variable" *ngIf="inputType != 'WORD'">
+          {{ versesSeachResultsModel.wordCount }}
+          <button
+            (click)="userInput = ''"
+            nz-button
+            nzType="default"
+            nzShape="round"
+            nz-tooltip
+            nzTooltipTitle="Delete variable : {{ userInput }}"
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
+        </div>
+
+        <div class="variable" *ngIf="inputType == 'WORD'">
+          {{ versesSeachResultsModel.versesCount }}
+          <button
+            (click)="userInput = ''"
+            nz-button
+            nzType="default"
+            nzShape="round"
+            nz-tooltip
+            nzTooltipTitle="Delete variable : {{ userInput }}"
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
+        </div>
+        <div class="detail">{{ userInput }}</div>
+      </div>
+    </nz-card>
+  </div>
+
+  <div
+    style="    background: cornflowerblue;
+    padding: 5px !important;
+    border-radius: 5px;margin: auto;
+}"
+    nz-col
+    [nzSpan]="10"
+  >
+    <jhi-splind-card [showEdit]="false" [splend]="splend"></jhi-splind-card>
+  </div>
+</div>
+
+<!-- Main Content Area -->
+<div nz-row [nzGutter]="16">
+  <!-- Left Column -->
+  <div nz-col [nzSpan]="14">
+    <!-- Results Section -->
+
+    <nz-spin [nzSpinning]="isLoading">
+      <ng-template>
+        <span><strong>Loading Verses ... </strong></span>
+      </ng-template>
+    </nz-spin>
+    <!-- Your content here, displayed when loading is false -->
+    <div *ngIf="!isLoading">
+      <nz-card *ngIf="versesSeachResultsModel && versesSeachResultsModel.verses" class="results-card">
+        <nz-list [nzDataSource]="versesSeachResultsModel.verses" [nzRenderItem]="verseTemplate">
+          <ng-template #verseTemplate let-verse>
+            <nz-list-item>
+              <nz-card class="verse-card" [nzBorderless]="true">
+                <div class="verse-number">Verse #{{ verse.verseId }}</div>
+                <div class="verse-content">
+                  <!--<span *ngFor="let word of .split(' ')">
+                          <a  (click)="this.searchControl.setValue(word);" [innerHTML]="highlightText( word,versesSeachResultsModel.word)"></a>
+                      </span>-->
+                  <h6
+                    *ngIf="this.regexSearchControl.value"
+                    [innerHTML]="
+                      highlightTextRegexRed(
+                        highlightTextRegex(verse.diacriticVerse, this.regexSearchControl.value),
+                        versesSeachResultsModel.word
+                      )
+                    "
+                  ></h6>
+                </div>
+                <nz-tag>{{ verse.surah.name }}</nz-tag>
+                <nz-tag>{{ verse.surah.type }}</nz-tag>
+              </nz-card>
+            </nz-list-item>
+          </ng-template>
+        </nz-list>
+      </nz-card>
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div nz-col [nzSpan]="10" style="justify-items: center">
+    <!-- Regex Box -->
+
+    <nz-card *ngFor="let variable of splendVariables" nzBordered="false" class="custom-box">
+      <div class="box-header">
+        <span class="verse-info">{{ variable.wordVerseCount }} Verses</span>
+        <span class="title">{{ variable.word }}</span>
+      </div>
+      <div class="box-content">
+        <span>{{ variable.regexCount }} words</span>
+        <span class="arrow">←</span>
+        <span>{{ variable.regex }}</span>
+      </div>
+      <div *ngFor="let variableName of variable.variables" class="box-footer">
+        <div class="variable" *ngIf="variableName.value != 'WORD'">
+          {{ splendVariables[0].regexCount }}
+          <button
+            (click)="deleteSplendVarName(variable.id, variableName.name)"
+            nz-button
+            nzType="default"
+            nzShape="round"
+            nz-tooltip
+            nzTooltipTitle="Delete variable : {{ variableName.name }}"
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
+        </div>
+
+        <div class="variable" *ngIf="variableName.value == 'WORD'">
+          {{ splendVariables[0].wordVerseCount }}
+          <button
+            (click)="deleteSplendVarName(variable.id, variableName.name)"
+            nz-button
+            nzType="default"
+            nzShape="round"
+            nz-tooltip
+            nzTooltipTitle="Delete variable : {{ variableName.name }}"
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
+        </div>
+        <div class="detail">{{ variableName.name }}</div>
+      </div>
+      <div class="action-buttons">
+        <button
+          nz-button
+          nzType="default"
+          (click)="this.createVariableId = variable.id; this.isModelLoaded = true"
+          nzShape="round"
+          nz-tooltip
+          nzTooltipTitle="add variable"
+        >
+          <i nz-icon nzType="delete" nzTheme="outline"></i> add variable
+        </button>
+
+        <button (click)="deleteSplendVar(variable.id)" nz-button nzType="default" nzShape="round" nz-tooltip nzTooltipTitle="delete all">
+          <i nz-icon nzType="delete" nzTheme="outline"></i> delete
+        </button>
+      </div>
+    </nz-card>
+  </div>
+</div>

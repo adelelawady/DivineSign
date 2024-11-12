@@ -1,0 +1,53 @@
+<nz-modal
+  [(nzVisible)]="isModelLoaded"
+  nzTitle="Commnet Form"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="submitComment()"
+  nzOkText="Create"
+  nzCancelText="Cancel"
+>
+  <ng-container *nzModalContent>
+    <nz-input-group nzSize="large">
+      <input nz-input placeholder="Enter comment" [(ngModel)]="commnetInput" />
+    </nz-input-group>
+  </ng-container>
+</nz-modal>
+
+<div id="{{ comment.id }}" *ngIf="comment" class="comment-container">
+  <!-- Vertical Line for Nested Replies -->
+  <div class="comment-line"></div>
+
+  <!-- Comment Content -->
+  <nz-comment [nzDatetime]="toDate(comment.createdDate)">
+    <nz-comment-content>
+      <div nzCommentAuthor>
+        <img ngxGravatar [size]="20" [src]="''" class="user-img" [email]="comment.user.id" />
+        <a href="#">{{ comment.user.name }}</a>
+      </div>
+      <p style="font-weight: bold">{{ comment.content }}</p>
+    </nz-comment-content>
+
+    <!-- Likes Action with Click Event -->
+    <nz-comment-action>
+      <span (click)="likeComment(comment)">
+        <i nz-icon nzType="like" [nzTheme]="'outline'"></i>
+        <span>{{ comment.likes }}</span>
+      </span>
+    </nz-comment-action>
+
+    <!-- Reply Action with Click Event -->
+    <nz-comment-action>
+      <span (click)="addCommnet(comment.id)"> <i nz-icon nzType="comment"></i> Reply </span>
+    </nz-comment-action>
+    <!-- Nested Replies -->
+    <ng-container *ngIf="comment.comments">
+      <jhi-splind-comment
+        *ngFor="let reply of comment.comments"
+        [comment]="reply"
+        [level]="level + 1"
+        [splend]="splend"
+        (commnetAdded)="emit()"
+      ></jhi-splind-comment>
+    </ng-container>
+  </nz-comment>
+</div>

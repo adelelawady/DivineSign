@@ -1,0 +1,4 @@
+<nz-tag *ngFor="let tag of tags" (click)="removeTag(tag)" style="cursor: not-allowed" (nzOnClose)="removeTag(tag)">
+  {{ tag }}
+</nz-tag>
+<input nz-input placeholder="New tag" [(ngModel)]="newTag" (keyup.enter)="addTag()" />

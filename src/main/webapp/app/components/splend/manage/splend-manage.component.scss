@@ -1,0 +1,164 @@
+.layout-container {
+  min-height: 100vh;
+  background: #f0f2f5;
+}
+:host ::ng-deep nz-layout {
+  height: auto !important;
+}
+
+.inner-content {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+:host ::ng-deep .NgxEditor__Content {
+  height: auto !important;
+}
+
+.stats-container {
+  display: flex;
+  gap: 24px;
+  margin: 16px 0;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.results-card {
+  margin-top: 16px;
+}
+
+.verse-card {
+  width: 100%;
+}
+
+.verse-number {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.verse-content {
+  margin-bottom: 8px;
+}
+
+.regex-box,
+.condition-box {
+  margin-top: 16px;
+}
+
+.circle-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.arrow-down {
+  height: 24px;
+  width: 2px;
+  background: #1890ff;
+  margin: 16px auto;
+  position: relative;
+}
+:host ::ng-deep .highlight {
+  color: #198754 !important;
+  font-weight: bold !important;
+  background-color: yellow;
+}
+
+:host ::ng-deep .highlightRed {
+  color: red;
+  font-weight: bold !important;
+}
+
+.arrow-down::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #1890ff;
+  border-bottom: 2px solid #1890ff;
+  transform: rotate(45deg);
+}
+
+[nz-icon] {
+  display: contents;
+}
+
+.custom-box {
+  //width: 200px; /* Adjust based on your needs */
+  border: 2px solid blue;
+  //padding: 10px;
+  width: 300px;
+  margin: 8px;
+}
+
+.box-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.verse-info,
+.title {
+  font-size: 16px;
+}
+
+.box-content {
+  display: flex;
+  justify-content: space-around;
+  font-size: 16px;
+  margin: 10px 0;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  font-weight: 700;
+  align-items: center;
+}
+
+.word-count {
+  display: flex;
+  align-items: center;
+}
+
+.word-count .arrow {
+  margin: 0 5px;
+}
+
+:host ::ng-deep .custom-box .ant-card-body {
+  padding: 8px !important;
+}
+
+.box-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  border-top: 2px solid blue;
+  padding-top: 5px;
+}
+
+.variable,
+.detail {
+  padding: 5px;
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  padding-top: 5px;
+}
+
+.input-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

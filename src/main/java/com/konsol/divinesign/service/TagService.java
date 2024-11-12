@@ -1,5 +1,6 @@
 package com.konsol.divinesign.service;
 
+import com.konsol.divinesign.domain.Tag;
 import com.konsol.divinesign.service.dto.TagDTO;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -55,4 +56,15 @@ public interface TagService {
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    /**
+     * API
+     */
+
+    /**
+     * create a new tag
+     * @param tag the tag to create
+     * @return the created tag
+     */
+    Tag getOrCreateTag(String tag);
 }

@@ -33,11 +33,6 @@ public class Verse implements Serializable {
     @JsonIgnoreProperties(value = { "verses" }, allowSetters = true)
     private Surah surah;
 
-    @DBRef
-    @Field("splendVerses")
-    @JsonIgnoreProperties(value = { "validationMethod", "verses" }, allowSetters = true)
-    private SplendVerses splendVerses;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public String getId() {
@@ -89,19 +84,6 @@ public class Verse implements Serializable {
 
     public Verse surah(Surah surah) {
         this.setSurah(surah);
-        return this;
-    }
-
-    public SplendVerses getSplendVerses() {
-        return this.splendVerses;
-    }
-
-    public void setSplendVerses(SplendVerses splendVerses) {
-        this.splendVerses = splendVerses;
-    }
-
-    public Verse splendVerses(SplendVerses splendVerses) {
-        this.setSplendVerses(splendVerses);
         return this;
     }
 

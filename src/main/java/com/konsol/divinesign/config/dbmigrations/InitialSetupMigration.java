@@ -13,10 +13,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
@@ -40,8 +40,8 @@ public class InitialSetupMigration {
         addUsers(userAuthority, adminAuthority);
         try {
             loadQuranDB();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -104,13 +104,14 @@ public class InitialSetupMigration {
         return adminUser;
     }
 
-    public void loadQuranDB() throws JSONException {
+    public void loadQuranDB() throws Exception {
         InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("quran/quran.json");
 
-        InputStreamReader isReader = new InputStreamReader(in);
+        assert in != null;
+        InputStreamReader isReader = new InputStreamReader(in, StandardCharsets.UTF_8);
 
         BufferedReader reader = new BufferedReader(isReader);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new java.lang.StringBuilder();
         String str;
         try {
             while ((str = reader.readLine()) != null) {
@@ -146,22 +147,77 @@ public class InitialSetupMigration {
             JSONArray subVerses = jsonobject.getJSONArray("verses");
 
             for (int ii = 0; ii < subVerses.length(); ii++) {
-                JSONObject subJsonobject = subVerses.getJSONObject(ii);
+                try {
+                    JSONObject subJsonobject = subVerses.getJSONObject(ii);
 
-                Verse subVerse = new Verse();
+                    Verse subVerse = new Verse();
 
-                String subId = String.valueOf(subJsonobject.getInt("id"));
-                String subText = subJsonobject.getString("text");
-                subVerse.setVerseId(subId);
-                subVerse.setVerse(subText);
-                subVerse.setDiacriticVerse(removeDiacritics(subText).replaceAll("[أإآاٱ]", "ا"));
-                subVerse.setSurah(savedVerse);
-                Verse savedSubVerse = template.save(subVerse);
-                savedSubVerse.setId(subId);
-                savedVerse.addVerses(savedSubVerse);
-                template.save(savedVerse);
+                    String subId = String.valueOf(subJsonobject.getInt("id"));
+                    String subText = subJsonobject.getString("text");
+                    subVerse.setVerseId(subId);
+                    subVerse.setVerse(subText);
 
-                System.out.println(savedSubVerse.toString());
+                    String subRemovedFormate = removeDiacritics(subText);
+
+                    subRemovedFormate = subRemovedFormate
+                        .replaceAll("[أإآاٱ]", "ا")
+                        .replace("لآ", "لا")
+                        .replace("آ", "ا")
+                        .replace("نٞ", "ن")
+                        .replace("بٞ", "ب")
+                        .replace("رٞ", "ر")
+                        .replace("رٗٞ", "ر")
+                        .replace("مٞ", "م")
+                        .replace("وٓ", "و")
+                        .replace("دٗٓ", "د")
+                        .replace("وٞٓ", "و")
+                        .replace("ةٗٓ", "ة")
+                        .replace("يـٓٗٓ", "يـ")
+                        .replace("ىٓٞٓ", "ي")
+                        .replace("هٓ", "ه")
+                        .replace("لٗا", "لا")
+                        .replace("لٗا", "لا")
+                        .replace("نٗا", "نا")
+                        .replace("رٗ", "ر")
+                        .replace("ءٞ", "ء")
+                        .replace("دٞ", "د")
+                        .replace("ةٗ", "ة")
+                        .replace("ءٞ", "ء")
+                        .replace("دٞ", "د")
+                        .replace("يٞ", "ي")
+                        .replace("قٞ", "ق")
+                        .replace("هـٓؤ", "هؤ")
+                        .replace("هـٓا", "ها")
+                        .replace("لـٓئك", "لئك")
+                        .replace("ةٞ", "ة")
+                        .replace("ضٞ", "ض")
+                        .replace("اليل", "الليل")
+                        .replace("سٞ", "س")
+                        .replace("بٗا", "با")
+                        .replace("تٞ", "ت")
+                        .replace("يٓ", "ي")
+                        .replace("ةٖ", "ة")
+                        .replace("رٖ", "ر")
+                        .replace("ءٖ", "ء")
+                        .replace("ةٖ", "ة")
+                        .replace("رٖ", "ر")
+                        .replace("ءٖ", "ء")
+                        .replace("ثٞ", "ث")
+                        .replace("كٞ", "ك")
+                        .replace("لٞ", "ل")
+                        .replace("مٖ", "م");
+                    subVerse.setDiacriticVerse(subRemovedFormate);
+
+                    subVerse.setSurah(savedVerse);
+                    Verse savedSubVerse = template.save(subVerse);
+                    savedSubVerse.setId(subId);
+                    savedVerse.addVerses(savedSubVerse);
+                    template.save(savedVerse);
+
+                    System.out.println(savedSubVerse.toString());
+                } catch (Exception e) {
+                    throw new Exception(e.getMessage());
+                }
             }
         }
     }

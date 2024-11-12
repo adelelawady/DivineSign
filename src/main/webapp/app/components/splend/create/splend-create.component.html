@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <h2 id="jhi-splend-heading" data-cy="SplendCreateUpdateHeading" jhiTranslate="divineSignApp.splend.home.createOrEditLabel">
+      Create or edit a Splend
+    </h2>
+
+    <div>
+      <jhi-alert-error></jhi-alert-error>
+
+      <div class="mb-3">
+        <label class="form-label" for="field_title" jhiTranslate="divineSignApp.splend.title">Title</label>
+        <input type="text" [(ngModel)]="title" class="form-control" name="title" id="field_title" data-cy="title" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="field_content" jhiTranslate="divineSignApp.splend.content">Content</label>
+
+        <div id="field_content" class="NgxEditor__Wrapper">
+          <ngx-editor-menu [toolbar]="toolbar" [editor]="editor"> </ngx-editor-menu>
+          <ngx-editor [editor]="editor" [(ngModel)]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="field_content" jhiTranslate="divineSignApp.splend.tags">Content</label>
+
+        <jhi-tags-input [(tags)]="tags"></jhi-tags-input>
+      </div>
+    </div>
+    <div>
+      <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button (click)="save()" type="submit" id="save-entity" data-cy="entityCreateSaveButton" class="btn btn-primary">
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+      </button>
+    </div>
+  </div>
+</div>

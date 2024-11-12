@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Routes } from '@angular/router';
 
 import { Authority } from 'app/config/authority.constants';
@@ -16,6 +18,7 @@ const routes: Routes = [
     loadComponent: () => import('./layouts/navbar/navbar.component'),
     outlet: 'navbar',
   },
+  //AboutPageComponent
   {
     path: 'admin',
     data: {
@@ -24,6 +27,13 @@ const routes: Routes = [
     canActivate: [UserRouteAccessService],
     loadChildren: () => import('./admin/admin.routes'),
   },
+
+  {
+    path: 'user/splend',
+    data: { pageTitle: 'divineSignApp.splend.home.title' },
+    loadChildren: () => import('./components/splend/splend.routes'),
+  },
+
   {
     path: 'account',
     loadChildren: () => import('./account/account.route'),
@@ -32,6 +42,12 @@ const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./login/login.component'),
     title: 'login.title',
+  },
+  {
+    path: 'about',
+    title: 'home.title',
+    loadComponent: () => import('./about-page/about-page.component'),
+    // loadChildren: () => import('./about-page/about-page.module').then(m => m.AboutPageModule)
   },
   {
     path: '',

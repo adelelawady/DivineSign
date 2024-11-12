@@ -21,3 +21,78 @@ Main page styles
     background-size: contain;
   }
 }
+.ideas-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  //padding: 20px;
+}
+
+.idea-cards {
+  margin-top: 20px;
+}
+
+.idea-card {
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.idea-content {
+  margin: 16px 0;
+}
+
+.idea-tags {
+  margin-top: 12px;
+}
+
+.action-icon {
+  margin-right: 8px;
+}
+
+.action-text {
+  font-size: 14px;
+}
+
+:host ::ng-deep .ant-card-meta-title {
+  margin-bottom: 4px;
+}
+
+:host ::ng-deep .ant-card-meta-description {
+  color: #8c8c8c;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 0 16px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+[nz-menu-item] {
+  color: white;
+}
+
+:host ::ng-deep[nz-sider-trigger] {
+  display: none;
+}

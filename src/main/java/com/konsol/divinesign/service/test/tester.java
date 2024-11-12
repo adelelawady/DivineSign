@@ -1,7 +1,15 @@
 package com.konsol.divinesign.service.test;
 
+import com.konsol.divinesign.domain.Surah;
+import com.konsol.divinesign.domain.TestRecord;
 import com.konsol.divinesign.domain.Verse;
+import com.konsol.divinesign.repository.SurahRepository;
+import com.konsol.divinesign.repository.TestRecRepository;
 import com.konsol.divinesign.repository.VerseRepository;
+import com.konsol.divinesign.service.VerseService;
+import com.konsol.divinesign.service.api.dto.VerseSearchResultPayload;
+import com.konsol.divinesign.service.mapper.api.VersePayloadMapper;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
@@ -18,19 +26,31 @@ public class tester implements CommandLineRunner {
     VerseRepository verseRepository;
 
     @Autowired
+    SurahRepository surahRepository;
+
+    @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private TestRecRepository testRecRepository;
+
+    @Autowired
+    VerseService verseService;
+
+    @Autowired
+    VersePayloadMapper versePayloadMapper;
 
     @Override
     public void run(String... args) throws Exception {
         // String regexPattern = "(^|[^\\p{IsAlphabetic}\\p{IsDigit}])" + "يوم" + "($|[^\\p{IsAlphabetic}\\p{IsDigit}])";
-        String regexPattern = "(?<!\\S)" + "دنيا" + "(?!\\S)";
+        //  String regexPattern = "(?<!\\S)" + "دنيا" + "(?!\\S)";
         //String regexPattern = "\\b" + "يوم" + "\\b";
-        List<Verse> verseList = verseRepository.findDiacriticVerseContaining("دنيا");
+        //  List<Verse> verseList = verseRepository.findDiacriticVerseContaining("دنيا");
 
-        AtomicInteger MonthSingleWordCount = new AtomicInteger();
-        verseList.forEach(verse -> {
-            MonthSingleWordCount.addAndGet(countOccurrences(removeDiacritics(verse.getDiacriticVerse())));
-        });
+        // AtomicInteger MonthSingleWordCount = new AtomicInteger();
+        //  verseList.forEach(verse -> {
+        //      MonthSingleWordCount.addAndGet(countOccurrences(removeDiacritics(verse.getDiacriticVerse())));
+        //  });
 
         /* List<Verse> verseListDis= new ArrayList<>();
         verseList.forEach(verseFound->{
@@ -41,8 +61,47 @@ public class tester implements CommandLineRunner {
 
 */
 
-        System.out.println(MonthSingleWordCount);
-        System.out.println("found Verses: " + verseList.size());
+        //   System.out.println(MonthSingleWordCount);
+        //   System.out.println("found Verses: " + verseList.size());
+
+        /*
+
+        List<Verse> verseList = verseRepository.findAll();
+
+        for(Verse verse:verseList){
+
+            for (String word :verse.getDiacriticVerse().split(" ")){
+
+                List<TestRecord> testRecordList=testRecRepository.findAllByWord(word);
+
+                if (testRecordList.isEmpty()){
+
+                    // new word
+
+                    TestRecord testRecord= new TestRecord();
+                    testRecord.setWord(word);
+                    testRecRepository.save(testRecord);
+
+
+                    VerseSearchResultPayload verseSearchResultPayload= new VerseSearchResultPayload();
+                    List<Verse> foundVerses=verseService.searchVersesByWord(word);
+                    verseSearchResultPayload.setVersesCount(BigDecimal.valueOf(foundVerses.size()));
+                    verseSearchResultPayload.setVerses(foundVerses.stream().map(versePayloadMapper::toDto).toList());
+                    verseSearchResultPayload.setWordCount(BigDecimal.valueOf(verseService.findWordOccurrencesInVerseList(foundVerses,word)));
+
+
+                    testRecord.setVersesCount(verseSearchResultPayload.getVersesCount());
+                    testRecord.setWordCount(verseSearchResultPayload.getWordCount());
+                }else{
+                    continue;
+                }
+
+
+            }
+
+        }
+        */
+
     }
 
     public static String removeDiacritics(String arabicText) {

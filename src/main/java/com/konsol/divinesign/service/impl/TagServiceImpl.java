@@ -77,4 +77,15 @@ public class TagServiceImpl implements TagService {
         LOG.debug("Request to delete Tag : {}", id);
         tagRepository.deleteById(id);
     }
+
+    @Override
+    public Tag getOrCreateTag(String tag) {
+        Optional<Tag> foundTag = tagRepository.findByTitle(tag);
+        if (foundTag.isPresent()) {
+            return foundTag.orElseThrow();
+        } else {
+            Tag newTag = new Tag().title(tag);
+            return tagRepository.save(newTag);
+        }
+    }
 }

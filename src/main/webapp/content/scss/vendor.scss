@@ -6,6 +6,8 @@ eg $input-color: red;
 ****************************/
 // Override Bootstrap variables
 @import 'bootstrap-variables';
+@import '~ng-zorro-antd/ng-zorro-antd.min.css';
+
 // Import Bootstrap source files from node_modules
 @import 'bootstrap/scss/bootstrap';
 

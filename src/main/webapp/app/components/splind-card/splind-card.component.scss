@@ -1,0 +1,45 @@
+:host ::ng-deep .ant-card-meta-detail {
+  margin-bottom: 10px;
+}
+
+:host ::ng-deep .ant-card-meta-description {
+  margin-bottom: none !important;
+}
+
+:host ::ng-deep .NgxEditor__Content {
+  height: auto;
+}
+
+:host ::ng-deep .NgxEditor {
+  border: none;
+}
+.button-group {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+.stats-container {
+  display: flex;
+  gap: 24px;
+  margin: 16px 0;
+}
+
+:host ::ng-deep .ant-card-bordered {
+  border: 2px solid #f0f0f0;
+  border-radius: 3px;
+}
+
+:host ::ng-deep .highlight {
+  color: #198754 !important;
+  font-weight: bold !important;
+  background-color: yellow;
+}
+
+:host ::ng-deep .highlightRed {
+  color: red;
+  font-weight: bold !important;
+}
+
+.hidden {
+  display: none;
+}

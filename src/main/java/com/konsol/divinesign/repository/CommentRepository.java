@@ -22,4 +22,6 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
 
     @Query("{'id': ?0}")
     Optional<Comment> findOneWithEagerRelationships(String id);
+
+    List<Comment> findAllBySplendId(String splendId);
 }

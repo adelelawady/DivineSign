@@ -1,5 +1,7 @@
+/* eslint-disable */
+
 import { Component, OnInit, Renderer2, RendererFactory2, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import dayjs from 'dayjs/esm';
 
@@ -8,13 +10,40 @@ import { AppPageTitleStrategy } from 'app/app-page-title-strategy';
 import FindLanguageFromKeyPipe from 'app/shared/language/find-language-from-key.pipe';
 import FooterComponent from '../footer/footer.component';
 import PageRibbonComponent from '../profiles/page-ribbon.component';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzBreadCrumbComponent, NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzSliderComponent, NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { BrowserModule } from '@angular/platform-browser';
+// app.module.ts
+import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+
+const antDesignIcons = AllIcons as {
+  [key: string]: any;
+};
 
 @Component({
   standalone: true,
   selector: 'jhi-main',
   templateUrl: './main.component.html',
-  providers: [AppPageTitleStrategy],
-  imports: [RouterOutlet, FooterComponent, PageRibbonComponent],
+  styleUrl: './main.component.scss',
+  providers: [
+    AppPageTitleStrategy,
+    { provide: NZ_ICONS, useValue: Object.values(antDesignIcons) }, // Register all icons
+  ],
+  imports: [
+    RouterOutlet,
+    FooterComponent,
+    PageRibbonComponent,
+    RouterModule,
+    NzIconModule,
+    NzSliderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzBreadCrumbModule,
+    NzBreadCrumbComponent,
+  ],
 })
 export default class MainComponent implements OnInit {
   private renderer: Renderer2;

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Component, inject } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import dayjs from 'dayjs/esm';
@@ -9,6 +11,7 @@ import locale from '@angular/common/locales/en';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
 import MainComponent from './layouts/main/main.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   standalone: true,

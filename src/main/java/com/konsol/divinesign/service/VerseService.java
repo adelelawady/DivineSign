@@ -1,7 +1,11 @@
 package com.konsol.divinesign.service;
 
+import com.konsol.divinesign.domain.Verse;
 import com.konsol.divinesign.service.dto.VerseDTO;
+import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -55,4 +59,21 @@ public interface VerseService {
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    /**
+     * searchVersesByWord
+     * @param word query word
+     * @return list of verses
+     */
+    List<Verse> searchVersesByWord(String word);
+
+    /***
+     * findWordOccurrencesInVerse
+     * @param verse verse
+     * @param word query word
+     * @return number of occurrences of word in verse
+     */
+    int findWordOccurrencesInVerse(Verse verse, String word);
+
+    int findWordOccurrencesInVerseList(List<Verse> verse, String word);
 }

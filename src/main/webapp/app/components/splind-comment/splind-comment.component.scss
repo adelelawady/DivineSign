@@ -1,0 +1,16 @@
+/* comment.component.css */
+.comment-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.comment-line {
+  width: 2px;
+  background-color: #d1d1d1; /* Adjust color to match Reddit style */
+  margin-right: 8px;
+}
+
+.comment-content {
+  flex: 1;
+  padding-left: 8px; /* Additional padding for nested levels */
+}

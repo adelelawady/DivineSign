@@ -1,7 +1,8 @@
 package com.konsol.divinesign.web.rest;
 
-import com.konsol.divinesign.repository.SplendVersesRepository;
-import com.konsol.divinesign.service.SplendVersesService;
+import com.konsol.divinesign.domain.SplendVariables;
+import com.konsol.divinesign.repository.SplendVariablesRepository;
+import com.konsol.divinesign.service.SplendVariablesService;
 import com.konsol.divinesign.service.dto.SplendVersesDTO;
 import com.konsol.divinesign.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -23,7 +24,7 @@ import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link com.konsol.divinesign.domain.SplendVerses}.
+ * REST controller for managing {@link SplendVariables}.
  */
 @RestController
 @RequestMapping("/api/splend-verses")
@@ -36,13 +37,13 @@ public class SplendVersesResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final SplendVersesService splendVersesService;
+    private final SplendVariablesService splendVariablesService;
 
-    private final SplendVersesRepository splendVersesRepository;
+    private final SplendVariablesRepository splendVariablesRepository;
 
-    public SplendVersesResource(SplendVersesService splendVersesService, SplendVersesRepository splendVersesRepository) {
-        this.splendVersesService = splendVersesService;
-        this.splendVersesRepository = splendVersesRepository;
+    public SplendVersesResource(SplendVariablesService splendVariablesService, SplendVariablesRepository splendVariablesRepository) {
+        this.splendVariablesService = splendVariablesService;
+        this.splendVariablesRepository = splendVariablesRepository;
     }
 
     /**
@@ -58,7 +59,7 @@ public class SplendVersesResource {
         if (splendVersesDTO.getId() != null) {
             throw new BadRequestAlertException("A new splendVerses cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        splendVersesDTO = splendVersesService.save(splendVersesDTO);
+        splendVersesDTO = splendVariablesService.save(splendVersesDTO);
         return ResponseEntity.created(new URI("/api/splend-verses/" + splendVersesDTO.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, splendVersesDTO.getId()))
             .body(splendVersesDTO);
@@ -87,11 +88,11 @@ public class SplendVersesResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!splendVersesRepository.existsById(id)) {
+        if (!splendVariablesRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        splendVersesDTO = splendVersesService.update(splendVersesDTO);
+        splendVersesDTO = splendVariablesService.update(splendVersesDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, splendVersesDTO.getId()))
             .body(splendVersesDTO);
@@ -121,11 +122,11 @@ public class SplendVersesResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!splendVersesRepository.existsById(id)) {
+        if (!splendVariablesRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<SplendVersesDTO> result = splendVersesService.partialUpdate(splendVersesDTO);
+        Optional<SplendVersesDTO> result = splendVariablesService.partialUpdate(splendVersesDTO);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -142,7 +143,7 @@ public class SplendVersesResource {
     @GetMapping("")
     public ResponseEntity<List<SplendVersesDTO>> getAllSplendVerses(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
         LOG.debug("REST request to get a page of SplendVerses");
-        Page<SplendVersesDTO> page = splendVersesService.findAll(pageable);
+        Page<SplendVersesDTO> page = splendVariablesService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -156,7 +157,7 @@ public class SplendVersesResource {
     @GetMapping("/{id}")
     public ResponseEntity<SplendVersesDTO> getSplendVerses(@PathVariable("id") String id) {
         LOG.debug("REST request to get SplendVerses : {}", id);
-        Optional<SplendVersesDTO> splendVersesDTO = splendVersesService.findOne(id);
+        Optional<SplendVersesDTO> splendVersesDTO = splendVariablesService.findOne(id);
         return ResponseUtil.wrapOrNotFound(splendVersesDTO);
     }
 
@@ -169,7 +170,7 @@ public class SplendVersesResource {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSplendVerses(@PathVariable("id") String id) {
         LOG.debug("REST request to delete SplendVerses : {}", id);
-        splendVersesService.delete(id);
+        splendVariablesService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

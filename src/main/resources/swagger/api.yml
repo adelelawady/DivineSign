@@ -1,15 +1,282 @@
-# API-first development with OpenAPI
-# This file will be used at compile time to generate Spring-MVC endpoint stubs using openapi-generator
-openapi: '3.0.1'
+openapi: 3.0.1
 info:
-  title: 'divineSign'
+  title: divineSign
   version: 0.0.1
 servers:
-  - url: http://localhost:8080/api
+  - url: 'http://localhost:8080/api'
     description: Development server
-  - url: https://localhost:8080/api
+  - url: 'https://localhost:8080/api'
     description: Development server with TLS Profile
-paths: {}
+paths:
+  /splend/create:
+    post:
+      summary: ''
+      operationId: createSplend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SplendViewPayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSplend'
+      tags:
+        - splend
+  /verse/search:
+    post:
+      summary: Search Verses
+      operationId: searchVerse
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerseSearchResultPayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerseSearchPayload'
+  '/splend/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get Splend
+      tags:
+        - splend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SplendViewPayload'
+      operationId: getSplend
+  '/splend/{id}/like':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: like Splend
+      tags:
+        - splend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SplendViewPayload'
+      operationId: likeSplend
+  '/splend/{id}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: like Splend
+      tags:
+        - splend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommentViewPayload'
+      operationId: getSplendComments
+    post:
+      summary: ''
+      operationId: createSplendComment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentViewPayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentViewPayload'
+  '/splend/{id}/variables':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get Splend
+      tags:
+        - splend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SplendVariablePayload'
+      operationId: getSplendVariables
+      description: ''
+    post:
+      summary: ''
+      operationId: createSplendVariable
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SplendVariablePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSplendVariablePayload'
+    delete:
+      summary: ''
+      operationId: deleteSplendVariable
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: id
+    put:
+      summary: ''
+      operationId: updateSplendVariable
+      responses:
+        '200':
+          description: OK
+  '/splend/{id}/variables/{variableId}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: variableId
+        in: path
+        required: true
+    get:
+      summary: Get Splend
+      tags:
+        - splend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SplendVariablePayload'
+      operationId: getSplendVariable
+    post:
+      summary: ''
+      operationId: addVariableNameToVariable
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SplendVariablePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VariablePayload'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/VariablePayload'
+    delete:
+      summary: ''
+      operationId: deleteVariableName
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SplendVariablePayload'
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+  '/splend/{id}/variables/{variableId}/verses':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: variableId
+        in: path
+        required: true
+    get:
+      summary: Get Splend
+      tags:
+        - splend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VersePayload'
+      operationId: getSplendVariableVerses
+  /public/splends:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SplendViewPayload'
+      operationId: getPublicSplends
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: size
 components:
   responses:
     Problem:
@@ -56,7 +323,6 @@ components:
                 description: |
                   An absolute URI that identifies the specific occurrence of the problem.
                   It may or may not yield further information if dereferenced.
-
   securitySchemes:
     jwt:
       type: http
@@ -67,6 +333,298 @@ components:
       type: http
       description: Basic Authentication
       scheme: basic
+  schemas:
+    CreateSplend:
+      title: CreateSplend
+      x-stoplight:
+        id: 0dh7lzpios7u8
+      type: object
+      properties:
+        title:
+          type: string
+          x-stoplight:
+            id: ahc5ex6epho6o
+          minLength: 5
+          maxLength: 300
+        content:
+          type: string
+          x-stoplight:
+            id: jf6i70el6qlk8
+          minLength: 8
+          maxLength: 5000
+        tags:
+          type: array
+          x-stoplight:
+            id: bx2d1t4cinwxq
+          uniqueItems: true
+          items:
+            x-stoplight:
+              id: yg0ogf6ztknc3
+            type: string
+      required:
+        - title
+        - content
+    SplendViewPayload:
+      title: Splend
+      x-stoplight:
+        id: ogrx3k4sag9tk
+      type: object
+      x-internal: false
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+          x-stoplight:
+            id: h88umhq1afib9
+        content:
+          type: string
+          x-stoplight:
+            id: prpbes2uoknqs
+        tags:
+          type: array
+          x-stoplight:
+            id: xiocfglvje414
+          items:
+            x-stoplight:
+              id: 92ge7vpf06x3t
+            type: string
+        likes:
+          type: string
+          x-stoplight:
+            id: c5dyv0zavu1q7
+        dislikes:
+          type: string
+          x-stoplight:
+            id: t8rk8jixmars6
+        comments:
+          type: array
+          x-stoplight:
+            id: hsd0mzrjye0au
+          items:
+            x-stoplight:
+              id: d97rv3d4gsv0i
+            type: string
+        createdDate:
+          type: string
+          x-stoplight:
+            id: pa8pt9hfjaubb
+          format: date-time
+        user:
+          $ref: '#/components/schemas/UserViewPayload'
+        variables:
+          type: array
+          x-stoplight:
+            id: 41wi48v6yo1i3
+          items:
+            $ref: '#/components/schemas/SplendVariablePayload'
+        verified:
+          type: boolean
+          x-stoplight:
+            id: 8q01esd83vih2
+          default: false
+        commentsCount:
+          type: integer
+          x-stoplight:
+            id: l18bgxcuayrpr
+          default: 0
+    VerseSearchResultPayload:
+      title: VerseSearchResultPayload
+      x-stoplight:
+        id: rc71slpo6gmw8
+      type: object
+      properties:
+        wordCount:
+          type: number
+          x-stoplight:
+            id: dso9xz8onqudw
+        versesCount:
+          type: number
+          x-stoplight:
+            id: noovo6u0l69n2
+        verses:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersePayload'
+    VerseSearchPayload:
+      type: object
+      x-stoplight:
+        id: 8cb3ca9c2fc34
+      properties:
+        wordQuery:
+          type: string
+          x-stoplight:
+            id: v6gbqaq2bcagv
+        regexQuery:
+          type: string
+          x-stoplight:
+            id: nzp1dsy8fmq6l
+        applySeachQuries:
+          type: boolean
+          x-stoplight:
+            id: lrko1m9uzb39f
+        resultsSeachQueries:
+          type: array
+          x-stoplight:
+            id: eopwhp6atyndz
+          items:
+            $ref: '#/components/schemas/VerseSearchPayload'
+    VersePayload:
+      title: VersePayload
+      x-stoplight:
+        id: dip1xc63n5rbn
+      type: object
+      properties:
+        verseId:
+          type: string
+          x-stoplight:
+            id: nyd51z6mtl5oq
+        verse:
+          type: string
+          x-stoplight:
+            id: tv5s8ibbidlmx
+        diacriticVerse:
+          type: string
+          x-stoplight:
+            id: o7z2k9af0sc7d
+        surah:
+          $ref: '#/components/schemas/SurahPayload'
+    SurahPayload:
+      title: SurahPayload
+      x-stoplight:
+        id: ci4n4v82d1i40
+      type: object
+      properties:
+        surahId:
+          type: string
+          x-stoplight:
+            id: xjrjeff2ut1z9
+        name:
+          type: string
+          x-stoplight:
+            id: t3fwgdu65rsos
+        type:
+          type: string
+          x-stoplight:
+            id: n91ux9r5suciu
+        totalVerses:
+          type: number
+          x-stoplight:
+            id: r84y1u30hcxww
+    CommentViewPayload:
+      title: CommentViewPayload
+      x-stoplight:
+        id: putqv4ev26a5z
+      type: object
+      properties:
+        id:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserViewPayload'
+        likes:
+          type: string
+          x-stoplight:
+            id: tgepnnux3a0dt
+        content:
+          type: string
+          x-stoplight:
+            id: 0r1jccfetd8en
+        comments:
+          type: array
+          x-stoplight:
+            id: 29yj2leh3avjh
+          items:
+            $ref: '#/components/schemas/CommentViewPayload'
+        parentComment:
+          type: string
+          x-stoplight:
+            id: zmdzqx8wk6s97
+        createdDate:
+          type: string
+          x-stoplight:
+            id: uek1s7qutbsbn
+          format: date-time
+    UserViewPayload:
+      title: UserViewPayload
+      x-stoplight:
+        id: somagizamuwgt
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: 312nke1nhvwpb
+    CreateSplendVariablePayload:
+      title: SplendVariablePayload
+      x-stoplight:
+        id: hgh2ovmqni0dp
+      type: object
+      properties:
+        search:
+          $ref: '#/components/schemas/VerseSearchPayload'
+        variableName:
+          type: string
+          x-stoplight:
+            id: rqc33lld6ecf8
+        variableValue:
+          type: string
+          x-stoplight:
+            id: bws72k0t4b0lx
+          enum:
+            - WORD
+            - VERSE
+    SplendVariablePayload:
+      title: SplendVariablePayload
+      x-stoplight:
+        id: snrby9nqupgdl
+      type: object
+      properties:
+        word:
+          type: string
+          x-stoplight:
+            id: 7okbt52u8t6wo
+        regex:
+          type: string
+          x-stoplight:
+            id: kobajoqn44f6q
+        variables:
+          type: array
+          x-stoplight:
+            id: rtidg00xsjkqo
+          items:
+            $ref: '#/components/schemas/VariablePayload'
+        wordVerseCount:
+          type: string
+          x-stoplight:
+            id: ghk0u4hxluy26
+        regexCount:
+          type: string
+          x-stoplight:
+            id: rnjnn8l9kjmxa
+        id:
+          type: string
+          x-stoplight:
+            id: meadftt5thl82
+    VariablePayload:
+      title: VariablePayload
+      x-stoplight:
+        id: kmm2qsvy33i6v
+      type: object
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: quumlqxwcpil8
+        value:
+          type: string
+          x-stoplight:
+            id: igjcktld85dvz
+        veriableId:
+          type: string
+          x-stoplight:
+            id: vzqv7wmmxjqx1
 security:
   - jwt: []
   - basic: []

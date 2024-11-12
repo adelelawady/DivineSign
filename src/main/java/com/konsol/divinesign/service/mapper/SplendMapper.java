@@ -2,7 +2,7 @@ package com.konsol.divinesign.service.mapper;
 
 import com.konsol.divinesign.domain.Category;
 import com.konsol.divinesign.domain.Splend;
-import com.konsol.divinesign.domain.SplendVerses;
+import com.konsol.divinesign.domain.SplendVariables;
 import com.konsol.divinesign.domain.User;
 import com.konsol.divinesign.service.dto.CategoryDTO;
 import com.konsol.divinesign.service.dto.SplendDTO;
@@ -35,7 +35,7 @@ public interface SplendMapper extends EntityMapper<SplendDTO, Splend> {
     @Named("splendVersesId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    SplendVersesDTO toDtoSplendVersesId(SplendVerses splendVerses);
+    SplendVersesDTO toDtoSplendVersesId(SplendVariables splendVariables);
 
     @Named("userId")
     @BeanMapping(ignoreByDefault = true)

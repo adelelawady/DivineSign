@@ -1,0 +1,12 @@
+<nz-spin [nzSpinning]="isLoading">
+  <ng-template>
+    <span><strong>Loading Verses ... </strong></span>
+  </ng-template>
+</nz-spin>
+
+<div *ngIf="splends">
+  <div *ngIf="!isLoading">
+    <jhi-splind-card style="margin: 5px" *ngFor="let splend of splends" [splend]="splend"></jhi-splind-card>
+    <br />
+  </div>
+</div>

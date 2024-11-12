@@ -1,11 +1,42 @@
 {
   "divineSignApp": {
+    "createSplend": {
+      "home": {
+        "title": "Splends",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Splend",
+        "createLabelPlaceholder": "Type Here ..",
+        "createOrEditLabel": "Create New Splend",
+        "notFound": "No Splends found"
+      },
+      "created": "A new Splend is created with identifier {{ param }}",
+      "updated": "A Splend is updated with identifier {{ param }}",
+      "deleted": "A Splend is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Splend {{ id }}?"
+      },
+      "detail": {
+        "title": "Splend"
+      },
+      "id": "ID",
+      "title": "Title",
+      "content": "Content",
+      "likes": "Likes",
+      "dislikes": "Dislikes",
+      "verified": "Verified",
+      "category": "Category",
+      "verses": "Verses",
+      "tags": "Tags",
+      "likedUsers": "Liked Users",
+      "dislikedSplend": "Disliked Splend"
+    },
+
     "splend": {
       "home": {
         "title": "Splends",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Splend",
-        "createOrEditLabel": "Create or edit a Splend",
+        "createOrEditLabel": "Create New Splend",
         "notFound": "No Splends found"
       },
       "created": "A new Splend is created with identifier {{ param }}",

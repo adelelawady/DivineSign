@@ -1,6 +1,11 @@
 package com.konsol.divinesign.service;
 
+import com.konsol.divinesign.domain.Comment;
+import com.konsol.divinesign.domain.Splend;
+import com.konsol.divinesign.domain.Verse;
+import com.konsol.divinesign.service.api.dto.*;
 import com.konsol.divinesign.service.dto.SplendDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,9 +63,60 @@ public interface SplendService {
     Optional<SplendDTO> findOne(String id);
 
     /**
+     * Get the "id" splend.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Optional<Splend> findOneDomainOwner(String id);
+
+    /**
+     * Get the "id" splend.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Optional<Splend> findOneDomainPublic(String id);
+
+    /**
      * Delete the "id" splend.
      *
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    /**
+     * API
+     */
+
+    /**
+     * Create a new splend
+     * @param createSplendPayload the payload to create a new splend
+     * @return the created splend
+     */
+    SplendViewPayload createSplend(CreateSplend createSplendPayload);
+
+    SplendVariablePayload createSplendVariable(String splendId, CreateSplendVariablePayload createSplendVariablePayload);
+
+    List<SplendVariablePayload> getSplendVariablesByOwner(String splendId);
+
+    SplendVariablePayload addVariableNameToVariable(
+        String id,
+        String variableId,
+        com.konsol.divinesign.service.api.dto.VariablePayload variablePayload
+    );
+
+    SplendVariablePayload getSplendVariable(String id);
+
+    void deleteSplendVariable(String id);
+
+    void deleteSplendVariableNameFromVariable(String id, VariablePayload variablePayload);
+
+    void likeSplend(String splendId);
+
+    List<Comment> findCommentsBySplendId(String splendId);
+
+    Comment createSplendComment(String splendId, CommentViewPayload commentViewPayload);
+
+    List<Verse> getSplendVariableVerses(String id, String variableId);
 }

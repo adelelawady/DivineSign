@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 
 /**
  * Base abstract class for entities which will hold definitions for created, last modified, created by,

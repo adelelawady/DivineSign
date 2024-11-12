@@ -1,0 +1,145 @@
+<nz-modal
+  [(nzVisible)]="isModelLoaded"
+  nzTitle="Commnet Form"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="submitComment()"
+  nzOkText="Create"
+  nzCancelText="Cancel"
+>
+  <ng-container *nzModalContent>
+    <nz-input-group nzSize="large">
+      <input nz-input placeholder="Enter comment" [(ngModel)]="commnetInput" />
+    </nz-input-group>
+  </ng-container>
+</nz-modal>
+
+<nz-card *ngIf="splend" class="idea-card" [nzActions]="[actionLike, actionComment, actionShare]">
+  <nz-card-meta [nzAvatar]="avatarTemplate" [nzTitle]="splend.title" [nzDescription]="splend.user.name"></nz-card-meta>
+
+  <div class="idea-content">
+    <ngx-editor
+      style="border: none"
+      [editor]="editor"
+      [placeholder]="'Enter text here...'"
+      [spellcheck]="true"
+      [(ngModel)]="splend.content"
+    ></ngx-editor>
+
+    <button
+      [hidden]="this.account().id !== this.splend.user.id || !showEdit"
+      [routerLink]="['user', 'splend', splend.id, 'manage']"
+      nz-button
+      nzType="default"
+      nzShape="round"
+      nz-tooltip
+      nzTooltipTitle="edit"
+    >
+      <i nz-icon nzType="edit" nzTheme="outline">edit</i>
+    </button>
+  </div>
+
+  <div class="idea-tags">
+    <nz-tag [nzColor]="'#87d068'" *ngIf="splend.verified"><span nz-icon nzType="check-circle"></span> verified</nz-tag>
+    <nz-tag [nzColor]="'#cd201f'" *ngIf="!splend.verified"><span nz-icon nzType="close-circle"></span> Not verified</nz-tag>
+
+    <nz-tag *ngFor="let tag of splend.tags">{{ tag }}</nz-tag>
+
+    <span *ngFor="let mainVar of splend.variables" style="display: contents">
+      <nz-tag
+        style="cursor: pointer"
+        (click)="this.showVerses = !this.showVerses; getAndShowSplendVariableVerses(varSub, mainVar)"
+        [nzColor]="'#f50'"
+        *ngFor="let varSub of mainVar.variables"
+        ><span nz-icon nzType="check"></span> {{ varSub.name }} - {{ varSub.name !== 'WORD' ? mainVar.regexCount : mainVar.wordVerseCount }}
+      </nz-tag>
+    </span>
+  </div>
+
+  <!-- create a new card here -->
+
+  <ng-template #avatarTemplate>
+    <img ngxGravatar [src]="''" class="user-img" [email]="splend.user.id" />
+    <!-- <img [src]="''" *ngIf="account" alt="{{account.login}}" class="user-img" ngxGravatar [email]="account.email"/>-->
+  </ng-template>
+
+  <ng-template #actionLike>
+    <span style="font-weight: bold" (click)="likeSplend()" nz-tooltip [nzTooltipTitle]="'Like'">
+      <i nz-icon nzType="like" class="action-icon"></i>
+      <span class="action-text">{{ splend.likes }}</span>
+    </span>
+  </ng-template>
+
+  <ng-template #actionComment>
+    <span style="font-weight: bold" (click)="getSplendComments(); showComments = !showComments" nz-tooltip [nzTooltipTitle]="'Comment'">
+      <i nz-icon nzType="comment" class="action-icon"></i>
+      <span class="action-text">{{ splend.commentsCount }}</span>
+    </span>
+  </ng-template>
+
+  <ng-template #actionShare>
+    <span nz-tooltip [nzTooltipTitle]="'Share'">
+      <i nz-icon nzType="share-alt"></i>
+    </span>
+  </ng-template>
+
+  <div style="margin-top: 5px; max-height: 500px; overflow: scroll" *ngIf="showVerses">
+    <nz-card *ngIf="verses && mainSelectedVariable" class="results-card">
+      <nz-input-group>
+        <input [disabled]="true" style="color: red" [value]="mainSelectedVariable.word" type="text" nz-input placeholder="Search word" />
+        <input
+          [disabled]="true"
+          style="color: #198754"
+          [value]="mainSelectedVariable.regex"
+          type="text"
+          nz-input
+          placeholder="Regex Result"
+        />
+      </nz-input-group>
+      <!-- Stats -->
+      <div *ngIf="mainSelectedVariable.wordVerseCount && mainSelectedVariable.regexCount" class="stats-container">
+        <nz-statistic [nzValue]="mainSelectedVariable.wordVerseCount" [nzTitle]="'Verses found'"></nz-statistic>
+        <nz-statistic [nzValue]="mainSelectedVariable.regexCount" [nzTitle]="'Words found'"></nz-statistic>
+      </div>
+
+      <nz-spin [nzSpinning]="isLoading">
+        <ng-template>
+          <span><strong>Loading Verses ... </strong></span>
+        </ng-template>
+      </nz-spin>
+
+      <nz-list *ngIf="!isLoading" [nzDataSource]="verses" [nzRenderItem]="verseTemplate">
+        <ng-template #verseTemplate let-verse>
+          <nz-list-item>
+            <nz-card class="verse-card" [nzBorderless]="true">
+              <div class="verse-number">Verse #{{ verse.verseId }}</div>
+              <div class="verse-content">
+                <!--<span *ngFor="let word of .split(' ')">
+                    <a  (click)="this.searchControl.setValue(word);" [innerHTML]="highlightText( word,versesSeachResultsModel.word)"></a>
+                </span>-->
+                <h6
+                  *ngIf="mainSelectedVariable.regex"
+                  [innerHTML]="
+                    highlightTextRegexRed(highlightTextRegex(verse.diacriticVerse, mainSelectedVariable.regex), mainSelectedVariable.word)
+                  "
+                ></h6>
+              </div>
+              <nz-tag>{{ verse.surah.name }}</nz-tag>
+              <nz-tag>{{ verse.surah.type }}</nz-tag>
+            </nz-card>
+          </nz-list-item>
+        </ng-template>
+      </nz-list>
+    </nz-card>
+  </div>
+
+  <div *ngIf="showComments">
+    <nz-comment>
+      <nz-comment-action>
+        <span (click)="addCommnet(null)"> <i nz-icon nzType="comment"></i> Reply </span>
+      </nz-comment-action>
+    </nz-comment>
+    <div *ngFor="let comment of comments">
+      <jhi-splind-comment [comment]="comment" [splend]="splend" (commentAdded)="getSplendComments()"></jhi-splind-comment>
+    </div>
+  </div>
+</nz-card>

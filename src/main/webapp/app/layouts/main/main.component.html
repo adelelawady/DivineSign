@@ -1,13 +1,39 @@
-<jhi-page-ribbon></jhi-page-ribbon>
-
-<div>
-  <router-outlet name="navbar"></router-outlet>
-</div>
-
-<div class="container-fluid">
-  <div class="card jh-card">
-    <router-outlet></router-outlet>
-  </div>
-
-  <jhi-footer></jhi-footer>
-</div>
+<nz-layout style="height: -webkit-fill-available">
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item></li>
+      <li nz-menu-item>
+        <span nz-icon nzType="home" nzTheme="outline"></span>
+        <span [routerLink]="['/']">Splind Feed</span>
+      </li>
+      <!-- <li nz-menu-item>
+          <span nz-icon nzType="folder-view"></span>
+          <span>MySplends</span>
+        </li>
+        -->
+      <li nz-menu-item>
+        <span nz-icon nzType="info-circle"></span>
+        <span [routerLink]="['/', 'about']">About</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <router-outlet name="navbar"></router-outlet>
+    </nz-header>
+    <nz-content>
+      <!--
+      
+        <nz-breadcrumb>
+          <nz-breadcrumb-item>User</nz-breadcrumb-item>
+          <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+        </nz-breadcrumb>
+          -->
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <jhi-footer></jhi-footer>
+  </nz-layout>
+</nz-layout>

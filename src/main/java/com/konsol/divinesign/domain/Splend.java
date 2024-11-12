@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  */
 @Document(collection = "splend")
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class Splend implements Serializable {
+public class Splend extends AbstractAuditingEntity<String> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,23 +23,36 @@ public class Splend implements Serializable {
     private String id;
 
     @NotNull
+    @NotBlank
+    @NotEmpty
     @Field("title")
     private String title;
 
+    @NotNull
+    @NotBlank
+    @NotEmpty
     @Field("content")
     private String content;
 
     @NotNull
     @Field("likes")
-    private Integer likes;
+    private Integer likes = 0;
 
     @NotNull
     @Field("dislikes")
-    private Integer dislikes;
+    private Integer dislikes = 0;
+
+    @NotNull
+    @Field("commentsCount")
+    private Integer commentsCount = 0;
 
     @NotNull
     @Field("verified")
-    private Boolean verified;
+    private Boolean verified = false;
+
+    @DBRef
+    @Field("user")
+    private User user;
 
     @DBRef
     @Field("category")
@@ -47,7 +60,7 @@ public class Splend implements Serializable {
 
     @DBRef
     @Field("verses")
-    private SplendVerses verses;
+    private SplendVariables verses;
 
     @DBRef
     @Field("tags")
@@ -61,6 +74,11 @@ public class Splend implements Serializable {
     @DBRef
     @Field("dislikedSplends")
     private Set<User> dislikedSplends = new HashSet<>();
+
+    @DBRef
+    @Field("variables")
+    @JsonIgnoreProperties(value = { "splend" }, allowSetters = true)
+    private Set<SplendVariables> variables = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -155,16 +173,16 @@ public class Splend implements Serializable {
         return this;
     }
 
-    public SplendVerses getVerses() {
+    public SplendVariables getVerses() {
         return this.verses;
     }
 
-    public void setVerses(SplendVerses splendVerses) {
-        this.verses = splendVerses;
+    public void setVerses(SplendVariables splendVariables) {
+        this.verses = splendVariables;
     }
 
-    public Splend verses(SplendVerses splendVerses) {
-        this.setVerses(splendVerses);
+    public Splend verses(SplendVariables splendVariables) {
+        this.setVerses(splendVariables);
         return this;
     }
 
@@ -275,5 +293,29 @@ public class Splend implements Serializable {
             ", dislikes=" + getDislikes() +
             ", verified='" + getVerified() + "'" +
             "}";
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<SplendVariables> getVariables() {
+        return variables;
+    }
+
+    public void setVariables(Set<SplendVariables> variables) {
+        this.variables = variables;
+    }
+
+    public @NotNull Integer getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(@NotNull Integer commentsCount) {
+        this.commentsCount = commentsCount;
     }
 }

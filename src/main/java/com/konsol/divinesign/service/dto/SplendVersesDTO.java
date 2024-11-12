@@ -1,10 +1,11 @@
 package com.konsol.divinesign.service.dto;
 
+import com.konsol.divinesign.domain.SplendVariables;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.konsol.divinesign.domain.SplendVerses} entity.
+ * A DTO for the {@link SplendVariables} entity.
  */
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class SplendVersesDTO implements Serializable {
